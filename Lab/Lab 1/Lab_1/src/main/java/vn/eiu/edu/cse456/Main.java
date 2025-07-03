@@ -40,9 +40,36 @@ public class Main {
         //Assignment 2
         Connection connection = null;
         try {
+
+
             String url = "jdbc:mysql://localhost:3306/cse456_q3_2025";
             connection = DriverManager.getConnection(url, "root", "123456789");
             System.out.println("Connected to database");
+
+            //insert into Student
+            String stringSQL = "INSERT INTO Student VALUES (?,?,?,?,?)";
+            PreparedStatement preparedStatementInsert = connection.prepareStatement(stringSQL);
+            preparedStatementInsert.setString(1, "S005");
+            preparedStatementInsert.setString(2, "John");
+            preparedStatementInsert.setString(3, "Doe5");
+            preparedStatementInsert.setInt(4, 1999);
+            preparedStatementInsert.setDouble(5, 3.8);
+            preparedStatementInsert.executeUpdate();
+
+            //update Student
+            String updateSQL = "UPDATE Student SET GPA = ? WHERE id = ?";
+            PreparedStatement preparedStatementUpdate = connection.prepareStatement(updateSQL);
+            preparedStatementUpdate.setDouble(1, 4.0);
+            preparedStatementUpdate.setString(2, "S005");
+            preparedStatementUpdate.executeUpdate();
+
+            //delete from Student
+            String deleteSQL = "DELETE FROM Student WHERE id = ?";
+            PreparedStatement preparedStatementDelete = connection.prepareStatement(deleteSQL);
+            preparedStatementDelete.setString(1, "S005");
+            preparedStatementDelete.executeUpdate();
+
+            //select from Student
             PreparedStatement pstmt = connection.prepareStatement("select * from Student");
 
             ResultSet rs = pstmt.executeQuery();
@@ -54,6 +81,8 @@ public class Main {
                         + rs.getDouble("gpa"));
             }
 
+
+            //insert into Course
             PreparedStatement pstmt2 = connection.prepareStatement("select * from Course");
 
             ResultSet rs2 = pstmt2.executeQuery();
@@ -63,6 +92,7 @@ public class Main {
                         + rs2.getString("credit") + " "
                         + rs2.getInt("hours") + " ");
             }
+
 
             connection.close();
         } catch (Exception e) {
