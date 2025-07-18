@@ -2,8 +2,9 @@ package vn.eiu.edu.cse456.service.implement;
 
 import vn.eiu.edu.cse456.entity.Student;
 import vn.eiu.edu.cse456.repository.implementation.StudentRepository;
+import vn.eiu.edu.cse456.service.interfaces.IStudentService;
 
-public class StudentService {
+public class StudentService implements IStudentService {
 
     StudentRepository  studentRepository;
 

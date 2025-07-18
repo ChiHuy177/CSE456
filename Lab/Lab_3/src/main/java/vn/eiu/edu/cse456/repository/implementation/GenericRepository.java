@@ -14,7 +14,7 @@ public abstract class GenericRepository<T> implements IGenericRepository<T> {
     }
 
     @Override
-    public void save(Object entity) {
+    public void save(T entity) {
         EntityManager em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         em.persist(entity);
@@ -23,7 +23,7 @@ public abstract class GenericRepository<T> implements IGenericRepository<T> {
     }
 
     @Override
-    public void delete(Object entity) {
+    public void delete(T entity) {
         EntityManager em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         em.remove(entity);
@@ -32,7 +32,7 @@ public abstract class GenericRepository<T> implements IGenericRepository<T> {
     }
 
     @Override
-    public void update(Object entity) {
+    public void update(T entity) {
         EntityManager em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
         em.merge(entity);
