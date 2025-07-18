@@ -1,4 +1,9 @@
 package vn.eiu.edu.cse456.repository.implementation;
 
-public class StudentRepository extends GenericRepository{
+import vn.eiu.edu.cse456.entity.Student;
+
+public class StudentRepository extends GenericRepository<Student> {
+    public StudentRepository(Class<Student> entityClass) {
+        super(entityClass);
+    }
 }

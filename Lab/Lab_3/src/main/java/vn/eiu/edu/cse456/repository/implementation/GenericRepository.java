@@ -6,7 +6,13 @@ import vn.eiu.edu.cse456.repository.interfaces.IGenericRepository;
 
 import java.util.List;
 
-public abstract class GenericRepository implements IGenericRepository {
+public abstract class GenericRepository<T> implements IGenericRepository<T> {
+    private Class<T> entityClass;
+
+    public GenericRepository(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+
     @Override
     public void save(Object entity) {
         EntityManager em = JpaUtil.getEntityManager();
@@ -35,9 +41,10 @@ public abstract class GenericRepository implements IGenericRepository {
     }
 
     @Override
-    public List findAll() {
+    public List<T> findAll() {
         EntityManager em = JpaUtil.getEntityManager();
-        List list = em.createQuery("SELECT e FROM Student e").getResultList();
+        List<T> list = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass)
+                .getResultList();
         em.close();
         return list;
     }

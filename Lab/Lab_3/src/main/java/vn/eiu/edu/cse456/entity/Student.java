@@ -11,7 +11,6 @@ import java.util.Locale;
 @NoArgsConstructor
 @Getter
 @Setter
-//@Data
 @Entity
 @Table(name = "tbl_student")
 public class Student {
@@ -43,4 +42,17 @@ public class Student {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "majorId", nullable = false)
     private Major major;
+
+    public Student(String fullName, Gender gender, LocalDate dob, double gpa, int enrollmentYear) {
+        this.fullName = fullName;
+        this.gender = gender;
+        this.dob = dob;
+        this.gpa = gpa;
+        this.enrollmentYear = enrollmentYear;
+    }
+
+    @Override
+    public String toString() {
+        return this.fullName + " " + this.studentId;
+    }
 }
