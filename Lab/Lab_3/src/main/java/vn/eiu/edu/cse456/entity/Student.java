@@ -40,7 +40,7 @@ public class Student {
     private School school;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "majorId", nullable = false)
+    @JoinColumn(name = "majorId")
     private Major major;
 
     public Student(String fullName, Gender gender, LocalDate dob, double gpa, int enrollmentYear) {

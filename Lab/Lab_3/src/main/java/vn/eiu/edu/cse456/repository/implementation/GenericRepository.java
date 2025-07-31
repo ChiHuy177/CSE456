@@ -6,7 +6,7 @@ import vn.eiu.edu.cse456.repository.interfaces.IGenericRepository;
 
 import java.util.List;
 
-public abstract class GenericRepository<T> implements IGenericRepository<T> {
+public class GenericRepository<T> implements IGenericRepository<T> {
     private Class<T> entityClass;
 
     public GenericRepository(Class<T> entityClass) {
@@ -20,6 +20,20 @@ public abstract class GenericRepository<T> implements IGenericRepository<T> {
         em.persist(entity);
         em.getTransaction().commit();
         em.close();
+    }
+
+    @Override
+    public void deleteById(Object id) {
+        try (EntityManager em = JpaUtil.getEntityManager()) {
+            em.getTransaction().begin();
+            T entity = em.find(entityClass, id);
+            if (entity == null)
+                throw new RuntimeException("Entity not found!");
+            em.remove(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -48,4 +62,6 @@ public abstract class GenericRepository<T> implements IGenericRepository<T> {
         em.close();
         return list;
     }
+
+
 }

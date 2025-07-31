@@ -23,4 +23,14 @@ public class MajorService implements IMajorService {
         majorRepository.update(major);
     }
 
+    public void deleteById(String id){
+        try {
+            majorRepository.deleteById(id);
+            System.out.println("Delete major with id: " + id + " success!");
+        } catch (Exception e) {
+            System.out.println("Delete major with id: " + id + " failed!");
+            throw new RuntimeException(e);
+        }
+    }
+
 }

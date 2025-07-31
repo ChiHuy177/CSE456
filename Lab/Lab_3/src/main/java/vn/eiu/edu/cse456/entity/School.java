@@ -23,10 +23,10 @@ public class School {
     @Column(name = "location", columnDefinition = "VARCHAR(100)", nullable = true)
     private String location;
 
-    @OneToMany(mappedBy = "school", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Major> majors = new ArrayList<>();
 
-    @OneToMany(mappedBy = "school", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<>();
 
     public void addStudent(Student student) {

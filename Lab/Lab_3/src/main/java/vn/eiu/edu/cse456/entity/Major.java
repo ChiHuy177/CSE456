@@ -23,9 +23,24 @@ public class Major {
     private String majorName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "schoolId", nullable = false)
+    @JoinColumn(name = "schoolId")
     private School school;
 
     @OneToMany(mappedBy = "major", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private java.util.List<Student> students = new ArrayList<>();
+
+    public void addStudent(Student student) {
+        students.add(student);
+        student.setMajor(this);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+        student.setMajor(null);
+    }
+
+    public Major(String majorId, String majorName) {
+        this.majorId = majorId;
+        this.majorName = majorName;
+    }
 }

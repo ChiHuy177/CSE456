@@ -23,4 +23,14 @@ public class StudentService implements IStudentService {
     public void update(Student student) {
         studentRepository.update(student);
     }
+
+    public void deleteById(String id){
+        try {
+            studentRepository.deleteById(id);
+            System.out.println("Delete student with id: " + id + " success!");
+        } catch (Exception e) {
+            System.out.println("Delete student with id: " + id + " failed!");
+            throw new RuntimeException(e);
+        }
+    }
 }

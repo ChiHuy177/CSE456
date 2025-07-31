@@ -7,4 +7,5 @@ public interface IGenericRepository<T> {
     void delete(T entity);
     void update(T entity);
     List<T> findAll();
+    void deleteById(Object id);
 }
