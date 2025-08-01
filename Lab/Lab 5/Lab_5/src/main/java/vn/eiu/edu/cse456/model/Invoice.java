@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,12 +25,8 @@ public class Invoice {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    @Column(name = "quantity")
-    private int quantity;
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InvoiceItem> items = new ArrayList<>();
 
     @Column(name = "total_amount")
     private double totalAmount;
@@ -36,11 +34,9 @@ public class Invoice {
     @Column(name = "invoice_date")
     private LocalDateTime invoiceDate;
 
-    public Invoice(Customer customer, Product product, int quantity) {
+    public Invoice(Customer customer) {
         this.customer = customer;
-        this.product = product;
-        this.quantity = quantity;
-        this.totalAmount = product.getPrice() * quantity;
         this.invoiceDate = LocalDateTime.now();
+        this.totalAmount = 0.0;
     }
 }

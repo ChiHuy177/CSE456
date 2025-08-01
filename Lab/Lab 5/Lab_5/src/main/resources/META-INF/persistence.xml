@@ -15,6 +15,7 @@
         <class>vn.eiu.edu.cse456.model.Customer</class>
         <class>vn.eiu.edu.cse456.model.Invoice</class>
         <class>vn.eiu.edu.cse456.model.Product</class>
+        <class>vn.eiu.edu.cse456.model.InvoiceItem</class>
 
         <!-- Cấu hình kết nối CSDL -->
         <properties>

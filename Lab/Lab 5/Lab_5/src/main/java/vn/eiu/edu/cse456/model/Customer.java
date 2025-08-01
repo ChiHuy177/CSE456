@@ -33,5 +33,5 @@ public class Customer {
     }
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Invoice> invoices = new ArrayList();
+    private List<Invoice> invoices = new ArrayList<>();
 }
